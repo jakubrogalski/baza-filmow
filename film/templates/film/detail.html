@@ -1,0 +1,44 @@
+{% extends 'film/base.html' %}
+{% block body %}
+<h1 class="site-header">Informacje o: {{ film.tytul }}</h1>
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="col-sm-12 col-md-7">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <form class="form-horizontal" action="" method="post" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <div class="col-xs-8 col-xs-10">
+                                <h4>Tytuł: {{ film.tytul }}</h4>
+                                <h4>Gatunek: {{ film.gatunek }}</h4>
+                                <h4>Gatunek 2: {{ film.gatunek2 }}</h4>
+                                <h4>Gatunek 3: {{ film.gatunek3 }}</h4>
+                                <h4>Rok produkcji: {{ film.rok }}</h4>
+                                <h4>Nota na Filmwebie: {{ film.nota }}</h4>
+                                <h4>Gdzie: {{ film.gdzie }}</h4>
+                                <h4><a id="link-google" href="https://www.google.pl/search?q={{ film.tytul }} film" target="_blank"> Link do
+                                    Google</a></h4>
+                                <form action="{% url 'film:film-delete' film.id %}" method="post"
+                                      style="display: inline;">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="film_id" value="{{ film.id }}"/>
+                                    <button type="submit" class="btn btn-default btn-sm" title="Usuń">
+                                        <span class="glyphicon glyphicon-trash"></span>
+                                    </button>
+
+                                    <!-- Update -->
+                                    <a href="{% url 'film:film-update' film.id %}" class="btn btn-default btn-sm"
+                                       role="button" title="Edytuj">
+                                        <span class="glyphicon glyphicon-pencil"></span>
+                                    </a>
+                                </form>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
